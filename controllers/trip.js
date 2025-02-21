@@ -1,6 +1,6 @@
 const Trip = require("../models/trip");
 
-/** Create a new trip */
+// Create a new trip 
 exports.createTrip = async (req, res) => {
   try {
     const { tripName, destination, date, description, visibility, owner } = req.body;
@@ -21,7 +21,7 @@ exports.createTrip = async (req, res) => {
   }
 };
 
-/** Get all trips */
+// Get all trips 
 exports.getAllTrips = async (req, res) => {
   try {
     const trips = await Trip.find();
@@ -31,7 +31,7 @@ exports.getAllTrips = async (req, res) => {
   }
 };
 
-/** Get a trip by ID */
+// Get a trip by ID 
 exports.getTripById = async (req, res) => {
   try {
     const trip = await Trip.findById(req.params.id);
@@ -42,18 +42,7 @@ exports.getTripById = async (req, res) => {
   }
 };
 
-/** Share a trip */
-// exports.shareTrip = async (req, res) => {
-//   try {
-//     const trip = await Trip.findById(req.params.id);
-//     if (!trip) return res.status(404).json({ message: "Trip not found" });
 
-//     const shareableLink = `http://yourfrontend.com/join-trip?code=${trip.inviteCode}`;
-//     res.json({ shareableLink });
-//   } catch (error) {
-//     res.status(500).json({ error: error.message });
-//   }
-// };
 
 
 
@@ -72,29 +61,10 @@ exports.shareTrip = async (req, res) => {
     }
   };
   
-/** Join a trip */
-// exports.joinTrip = async (req, res) => {
-//   try {
-//     const { userId, inviteCode } = req.body;
-//     const trip = await Trip.findOne({ inviteCode });
-
-//     if (!trip) return res.status(404).json({ message: "Invalid invite code" });
-
-//     if (trip.users.includes(userId)) {
-//       return res.status(400).json({ message: "User already joined" });
-//     }
-
-//     trip.users.push(userId);
-//     await trip.save();
-
-//     res.json({ message: "Joined trip successfully!", trip });
-//   } catch (error) {
-//     res.status(500).json({ error: error.message });
-//   }
-// };
 
 
-/** Join a trip */
+
+//Join a trip 
 exports.joinTrip = async (req, res) => {
     try {
       const { userId } = req.body;
@@ -116,7 +86,7 @@ exports.joinTrip = async (req, res) => {
     }
   };
   
-/** Get users for a trip */
+ //Get users for a trip 
 exports.getTripUsers = async (req, res) => {
   try {
     const trip = await Trip.findById(req.params.id).populate("users", "username email");
@@ -129,7 +99,7 @@ exports.getTripUsers = async (req, res) => {
   }
 };
 
-/** Update a trip */
+// Update a trip 
 exports.updateTrip = async (req, res) => {
   try {
     const { visibility, tripName, destination, date, description } = req.body;
@@ -152,7 +122,7 @@ exports.updateTrip = async (req, res) => {
   }
 };
 
-/** Delete a trip */
+// Delete a trip 
 exports.deleteTrip = async (req, res) => {
   try {
     const trip = await Trip.findByIdAndDelete(req.params.id);
@@ -163,7 +133,7 @@ exports.deleteTrip = async (req, res) => {
   }
 };
 
-/** Duplicate a trip */
+// Duplicate a trip 
 exports.duplicateTrip = async (req, res) => {
   try {
     const trip = await Trip.findById(req.params.id);
