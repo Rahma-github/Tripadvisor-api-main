@@ -16,6 +16,7 @@ const isAuth = async (req, res, next) => {
   try {
     // Read the public key
     const cert = process.env.SECRET_KEY;
+    console.log("SECRET_KEY:", process.env.SECRET_KEY);
 
     // Verify the token
     jwt.verify(token, cert, (err, payload) => {
@@ -37,6 +38,12 @@ const isAuth = async (req, res, next) => {
     next(error);
     /////// return res.status(401).json({ message: "Authentication failed" });
   }
+
+
+
+
+
+
 };
 
 module.exports = isAuth;

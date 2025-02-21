@@ -4,9 +4,12 @@ const cors=require('cors')
 
 require('dotenv').config()
 
-const PORT=process.env.PORT;
-const URL=process.env.MONGODB_URI.replace('<db_password>',process.env.MONGODB_PASSWORD);
+const PORT=4040;
+// const URL=process.env.MONGODB_URI.replace('<db_password>',process.env.MONGODB_PASSWORD);
+const URL='mongodb://127.0.0.1:27017/tripDB'
+;
 
+const tripRoutes = require("./routes/trip");
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -14,6 +17,7 @@ app.use(cors());
 
 //routes
 app.use('/api/auth',require('./routes/auth'));
+app.use("/api/trips", tripRoutes);
 
 app.use((err,req,res,next)=>{
     res.status(err.status || 500).json({
