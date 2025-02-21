@@ -4,11 +4,8 @@ const cors=require('cors')
 
 require('dotenv').config()
 
-const PORT=4040;
-// const URL=process.env.MONGODB_URI.replace('<db_password>',process.env.MONGODB_PASSWORD);
-const URL='mongodb://127.0.0.1:27017/tripDB'
-;
-
+const PORT=process.env.PORT;
+const URL=process.env.MONGODB_URI.replace('<db_password>',process.env.MONGODB_PASSWORD);
 const tripRoutes = require("./routes/trip");
 const app = express();
 app.use(express.json());
